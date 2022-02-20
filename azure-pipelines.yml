@@ -1,0 +1,27 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool: 
+ name: gal
+ 
+
+steps:
+- script:  az deployment group create --name galtemplate --resource-group M --template-file azuredeploy.json
+  displayName: 'Run a one-line script'
+- script:  az deployment group create --name galtemplate --resource-group M --template-file VM.json --parameters adminUsername=gal adminPassword=Password1234
+  displayName: 'Run a one-line script'
+- script: az storage container create --account-name galfrylichstorage11 --name galcontainer --auth-mode login
+  displayName: 'Run a one-line script'
+- script: az storage container create --account-name galfrylichstorage22 --name galcontainer --auth-mode login
+  displayName: 'Run a one-line script'  
+
+
+  
+
+  
+  
